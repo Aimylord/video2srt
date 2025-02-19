@@ -55,13 +55,7 @@ MODEL = WhisperModel("large-v3", device="cuda")  # 设置语音识别模型和�
 - **`SRT_LANGUAGE`**：目标字幕语言，支持的语言包括 `zh`（中文）、`en`（英文）、`ja`（日语）等。语音列表参照：https://github.com/openai/whisper/blob/main/whisper/tokenizer.py
 - **`MODEL`**：指定使用的模型和运行设备（推荐使用 `cuda` 以加速处理）。
 
-### 2. 设置视频目录
-通过修改以下代码行，指定要扫描的视频文件目录：
-
-```python
-directory = r"H:\temp"  # 替换为您的视频文件目录
-```
-### 3. 使用方法
+### 2. 使用方法
 安装python，安装cuda（更新nivdia驱动，应该是自带cuda），安装对应版本torch。
 下载video2srt.py到需要生成字幕的文件夹，运行
 
