@@ -61,6 +61,9 @@ MODEL = WhisperModel("large-v3", device="cuda")  # 设置语音识别模型和�
 ```python
 directory = r"H:\temp"  # 替换为您的视频文件目录
 ```
+### 3. 使用方法
+安装python，安装cuda（更新nivdia驱动，应该是自带cuda），安装对应版本torch。
+下载video2srt.py到需要生成字幕的文件夹或者上级文件夹，运行
 
 ---
 
