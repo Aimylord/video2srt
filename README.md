@@ -1,5 +1,13 @@
 # 视频字幕生成工具
 
+电脑上存了很多电影都没有字幕，或者有字幕的不高清，高清的没字幕（原因你懂的），总是心有遗憾。
+
+如今有了AI的帮助，我这业余自学伪编程爱好者也能轻松写代码，于是AI生成，自己调试修改了一下，出了这么个工具。
+
+默认参数下，我的3060TI显存占用4G左右，平均3分钟出一个字幕。跑了一百三十多部，总体效果不错，解决了有无问题，准确率在7成以上，极个别会出错，反正我很满意。
+
+理论上增大beam_size、best_of参数可以提升效果，但据我测试没啥差异。以下说明几乎全部为AI生成，请自行学习探索：
+
 ## 功能介绍
 
 本工具是一款基于 `faster-whisper` 的视频字幕生成器，能够自动为视频文件生成 SRT 格式的字幕文件。它支持多种语言（如中文、英文、日语等），并利用 GPU 加速进行高效的语音转文字处理。
@@ -27,16 +35,10 @@ pip install faster-whisper
 
 如果需要 GPU 加速，请确保已安装 `torch` 和 `cuda` 相关依赖：
 
-```bash
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
-```
-
-> 注意：根据您的 CUDA 版本调整安装命令。
 
 ### 3. 下载模型
-`faster-whisper` 提供多种预训练模型（如 `tiny`, `base`, `small`, `medium`, `large-v3`）。默认使用 `large-v3` 模型，您可以根据需求下载其他模型。
-
-模型下载地址：[https://github.com/guillaumekln/faster-whisper](https://github.com/guillaumekln/faster-whisper)
+程序会自动下载模型，如果只是英语，可以考虑其他模型。
+具体见：https://github.com/SYSTRAN/faster-whisper/tree/master
 
 ---
 
@@ -50,7 +52,7 @@ SRT_LANGUAGE = "zh"  # 设置字幕语言（如 "zh" 表示中文，"en" 表示�
 MODEL = WhisperModel("large-v3", device="cuda")  # 设置语音识别模型和设备（如 "cuda" 或 "cpu"）
 ```
 
-- **`SRT_LANGUAGE`**：目标字幕语言，支持的语言包括 `zh`（中文）、`en`（英文）、`ja`（日语）等。
+- **`SRT_LANGUAGE`**：目标字幕语言，支持的语言包括 `zh`（中文）、`en`（英文）、`ja`（日语）等。语音列表参照：https://github.com/openai/whisper/blob/main/whisper/tokenizer.py
 - **`MODEL`**：指定使用的模型和运行设备（推荐使用 `cuda` 以加速处理）。
 
 ### 2. 设置视频目录
@@ -59,15 +61,6 @@ MODEL = WhisperModel("large-v3", device="cuda")  # 设置语音识别模型和�
 ```python
 directory = r"H:\temp"  # 替换为您的视频文件目录
 ```
-
-### 3. 运行脚本
-保存代码后，在终端运行以下命令启动程序：
-
-```bash
-python your_script_name.py
-```
-
-程序将自动扫描指定目录中的视频文件，并生成对应的 SRT 字幕文件。
 
 ---
 
@@ -116,5 +109,3 @@ python your_script_name.py
 3. **内存限制**：大型视频文件可能占用较多 GPU 内存，请确保设备有足够的资源。
 
 ---
-
-如果您有任何问题或建议，请随时联系开发者！
